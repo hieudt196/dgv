@@ -1,0 +1,23 @@
+{
+    "tittle": "Phiếu Nhập Kho",
+    "beforeRender": "../../template/cardImport/before",
+    "htmlFile": "template/cardImport/export.hbs",
+    "cssFiles": [
+        "template/css/metro.min.css"
+    ],
+    "helperFunctions": [
+        {"name": "moment", "ref":"helper-moment"}
+    ],
+    "pdf_options": {
+        "format": "A4",
+        "orientation": "portrait",
+        "border": {"top": "25px", "right": "25px", "bottom": "25px", "left": "25px"},
+        "footer": {
+            "height": "30px",
+            "width": "100%",
+            "content": {
+              "default": "<span style=\"color: #444;\">{{page}}</span>/<span>{{pages}}</span>"
+            }
+        }
+    }
+}

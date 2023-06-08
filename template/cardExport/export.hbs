@@ -1,0 +1,98 @@
+<!--
+More complex example demonstrating advanced features like
+- using custom server script to fetch remote data
+- using custom modules in safe sandbox
+- painting a chart
+- using global helpers
+- merging custom dynamic header document
+
+Note: This example requires jsreport to be configured with
+{ "allowLocalFilesAccess": true } or
+{ "sandbox": { "allowedModules": ["https"] } }
+!-->
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <style> 
+      {{Css}}
+    </style>
+  </head>
+  <body>
+    <div class="grid">
+        <div class="row">
+            <div class="cell-4 text-center text-bold">
+                <h5>{{data.companyName}}</h5>
+                <h6>{{data.tollName}}</h6>
+            </div>
+            <div class="cell-6 text-center">
+                
+            </div>
+            <div class="cell-2 text-center">
+                <h2 class="text-bold">BM PNK-1</h2>
+            </div>
+        </div>
+    </div>
+    </br>
+    <h1 class="text-center">{{title}}</h1>
+    <h2 class="text-center">Ngày {{{moment data.trans.TRANSACTION_DATETIME "DD"}}} Tháng {{{moment data.trans.TRANSACTION_DATETIME "MM"}}} Năm {{{moment data.trans.TRANSACTION_DATETIME "YYYY"}}}</h1>
+    </br>
+    <div class="grid">
+        <div class="row">
+            <div class="cell-2">
+                <div>Phương thức:</div>
+                <div>Người giao:</div>
+            </div>
+            <div class="cell-4">
+                <div>{{data.trans.TRANSACTION_IMPORT_METHOD_NAME}}</div>
+                <div>{{data.trans.ACTION_STAFF_NAME}}</div>
+            </div>
+            <div class="cell-2">
+                <div>Số Phiếu:</div>
+                <div>Người nhận:</div>
+            </div>
+            <div class="cell-4">
+                <div>{{data.trans.TRANSACTION_SP}}</div>
+                <div>{{data.trans.TRANSACTION_IMPORT_MANUFACTURE_NAME}}</div>
+            </div>
+        </div>
+    </div>
+    <table class='table table-border cell-border'>
+      <thead>
+          <tr>
+              <th>STT</th>
+              <th>Sản Phẩm</th>
+              <th>Từ Số</th>
+              <th>Đến Số</th>
+              <th>Số lượng</th>
+          </tr>
+      </thead>
+      <tbody>
+          {{#each data.trans_detail}}
+          <tr>
+              <td>{{@index}}</td>
+              <td>{{CARD_TYPE_NAME}}</td>
+              <td></td>
+              <td></td>
+              <td>{{AMOUT}}</td>
+          </tr>
+          {{/each}}
+      </tbody>
+    </table>
+    <div class="grid">
+        <div class="row">
+            <div class="cell-3 text-center text-bold">
+              <div>Trạm Trưởng</div>
+            </div>
+            <div class="cell-3 text-center text-bold">
+              <div>Kế Toán</div>
+            </div>
+            <div class="cell-3 text-center text-bold">
+              <div>Người Giao</div>
+            </div>
+            <div class="cell-3 text-center text-bold">
+              <div>Người Nhận</div>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>

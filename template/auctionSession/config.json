@@ -1,0 +1,35 @@
+{
+    "tittle": "BIÊN BẢN ĐẤU GIÁ TÀI SẢN",
+    "beforeRender": "../../template/auctionSession/before",
+    "htmlFile": "template/auctionSession/export.hbs",
+    "cssFiles": [
+        "template/css/metro.min.css"
+    ],
+    "helperFunctions": [
+        {
+            "name": "moment",
+            "ref": "helper-moment"
+        },
+        {
+            "name": "fieldSerial",
+            "ref": "../../template/auctionSession/fieldSerial"
+        }
+    ],
+    "pdf_options": {
+        "format": "A4",
+        "orientation": "Portrait",
+        "border": {
+            "top": "2cm",
+            "right": "1.5cm",
+            "bottom": "1.5cm",
+            "left": "3cm"
+        },
+        "footer": {
+            "height": "30px",
+            "width": "100%",
+            "content": {
+                "default": "ZCZc"
+            }
+        }
+    }
+}

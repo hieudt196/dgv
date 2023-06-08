@@ -1,0 +1,5 @@
+{
+    "tittle": "Báo cáo chi tiết giao dịch xe qua trạm",
+    "beforeRender": "../../template/transx/before",
+    "xlsxFile": "template/transx/export.xlsx"
+}

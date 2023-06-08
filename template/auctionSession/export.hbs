@@ -1,0 +1,220 @@
+<!--
+More complex example demonstrating advanced features like
+- using custom server script to fetch remote data
+- using custom modules in safe sandbox
+- painting a chart
+- using global helpers
+- merging custom dynamic header document
+
+Note: This example requires jsreport to be configured with
+{ "allowLocalFilesAccess": true } or
+{ "sandbox": { "allowedModules": ["https"] } }
+!-->
+<html>
+
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <style>
+    .container {
+      --bs-gutter-x: 1.5rem;
+      --bs-gutter-y: 0;
+      width: 100%;
+      padding-right: calc(var(--bs-gutter-x) * 0.5);
+      padding-left: calc(var(--bs-gutter-x) * 0.5);
+      margin-right: auto;
+      margin-left: auto;
+      font-family: 'Times New Roman', Times, serif;
+      max-width: 1200px;
+      line-height: 1.5;
+    }
+
+    .flex-end {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .flex-center {
+      display: flex;
+      justify-content: center;
+    }
+
+    .w {
+      width: fit-content;
+      flex: auto;
+    }
+
+    .background-image {
+      background-image: url("logo\ 4.png");
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .header {
+      font-size: 20px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    h3 {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    -content {
+      font-size: 18px;
+      font-weight: 300;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    td {
+      text-align: center;
+    }
+
+    .signature td {
+      height: 75px;
+    }
+
+    .text-right {
+      float: right;
+      text-align: center;
+    }
+
+
+    .heigh {
+      height: 75px;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .col-5 {
+      -ms-flex: 0 0 41.6666666667%;
+      flex: 0 0 41.6666666667%;
+      max-width: 41.6666666667%;
+      float: left;
+    }
+
+    .col-7 {
+      -ms-flex: 0 0 58.3333333333%;
+      flex: 0 0 58.3333333333%;
+      max-width: 58.3333333333%
+    }
+
+    .row {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      margin-right: -5px;
+      margin-left: -5px
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container background-image">
+    <div class="text-right">
+      <p>TP-ĐGTS-20
+        <span style="display: block;">
+          (Ban hành kèm theo Thông tư số 06/2017/TT-BTP)
+        </span>
+      </p>
+    </div>
+    <div class="heigh"> </div>
+    <div class="header">
+      <p>
+        CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM<br>
+        Độc lập – Tự do – Hạnh phúc<br>
+        _ _ _ _ _
+      </p>
+      <p>
+        BIÊN BẢN ĐẤU GIÁ TÀI SẢN
+      </p>
+    </div>
+    <div class="report-content">
+      – Căn cứ quy định của Luật đấu giá tài sản;<br>
+      – Thực hiện Hợp đồng dịch vụ đấu giá tài sản số ………………..………… ngày ………/….…/..…… giữa ………………………………………
+      và………………………………………….<br>
+      Hôm nay, vào hồi <strong>{{data.hour}}</strong> giờ <strong>{{data.minute}}</strong> phút
+      ngày
+      <strong>{{data.day}}</strong>, tại
+      <strong>{{data.agency_name}}</strong> ,<br>
+      – Tài sản đấu giá: <strong>{{data.asset_name}}</strong><br>
+      – Mã cuộc đấu giá: <strong>{{data.auction_code}}</strong><br>
+      – Mã tài sản: <strong>{{data.asset_code}}</strong><br>
+      – Giá khởi điểm của tài sản: <strong>{{data.price}} VNĐ</strong><br>
+      <strong>I. Thành phần tham dự:</strong><br>
+      * Khách mời chứng kiến (Họ và tên, chức vụ, nơi công tác):<br>
+      …………………………………………………………………………………………………………………………………………………………………………………………………………………<br>
+      …………………………………………………………………………………………………………………………………………………………………………………………………………………<br>
+      …………………………………………………………………………………………………………………………………………………………………………………………………………………<br>
+      …………………………………………………………………………………………………………………………………………………………………………………………………………………<br>
+      …………………………………………………………………………………………………………………………………………………………………………………………………………………<br>
+      * Đấu giá viên (Họ và tên, số Thẻ đấu giá viên):<br>
+      Ông <strong>{{data.full_name}}</strong> - số thẻ đấu giá viên :
+      <strong>{{data.user_code}}</strong><br>
+      * Người tham gia đấu giá (Họ và tên, số CMND/Hộ chiếu/số Thẻ căn cước công dân, địa chỉ liên lạc, nếu nhiều người
+      thì có danh sách kèm theo):<br>
+      Được liệt kê trong file PDF đính kèm<br>
+      <strong>II. Diễn biến cụ thể của cuộc đấu giá:</strong><br>
+      …………………………………………………………………………………………………………………………………………………………………………………………………………………<br>
+      …………………………………………………………………………………………………………………………………………………………………………………………………………………<br>
+      …………………………………………………………………………………………………………………………………………………………………………………………………………………<br>
+      …………………………………………………………………………………………………………………………………………………………………………………………………………………<br>
+      …………………………………………………………………………………………………………………………………………………………………………………………………………………<br>
+      …………………………………………………………………………………………………………………………………………………………………………………………………………………<br>
+      …………………………………………………………………………………………………………………………………………………………………………………………………………………<br>
+      Sau <strong>{{data.countBid}}</strong> lần trả giá, người trả giá cao nhất là Ông/Bà
+      <strong>{{data.member_name}}</strong>, địa chỉ
+      <strong>{{data.member_address}}</strong><br>
+      Chứng minh nhân dân /Hộ chiếu/Thẻ Căn cước công dân số: <strong>{{data.id_number}}</strong>
+      ngày cấp: <strong>{{data.id_date}}</strong> nơi cấp:
+      <strong>{{data.id_place}}</strong><br>
+      với giá đã trả là <strong>{{data.highestBid}}</strong> đồng (viết bằng chữ:
+      <strong>{{data.highestBidTex}}
+        Việt Nam đồng</strong>).<br>
+      Cuộc đấu giá kết thúc vào lúc <strong>{{data.end_time}}</strong> giờ cùng ngày. <br> các bên cùng
+      thống
+      nhất ký tên.<br>
+    </div>
+    <table>
+      <tr>
+        <td>
+          <b>Đại diện người tham gia đấu giá</b><br>
+          (Ký, ghi rõ họ, tên)
+        </td>
+        <td>
+          <b>Người có tài sản đấu giá</b><br>
+          (Ký, ghi rõ họ, tên)
+        </td>
+        <td>
+          <b>Người trúng đấu giá</b><br>
+          (Ký, ghi rõ họ, tên)
+        </td>
+      </tr>
+      <tr class="signature">
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <b>Đấu giá viên</b> <br>
+          (Ký, ghi rõ họ, tên)
+        </td>
+        <td></td>
+        <td>
+          <b>Người ghi biên bản</b> <br>
+          (Ký, ghi rõ họ, tên)
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+
+</html>

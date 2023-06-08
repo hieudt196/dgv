@@ -1,0 +1,109 @@
+<!--
+More complex example demonstrating advanced features like
+- using custom server script to fetch remote data
+- using custom modules in safe sandbox
+- painting a chart
+- using global helpers
+- merging custom dynamic header document
+
+Note: This example requires jsreport to be configured with
+{ "allowLocalFilesAccess": true } or
+{ "sandbox": { "allowedModules": ["https"] } }
+!-->
+<html>
+
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <style>
+    .container {
+      --bs-gutter-x: 1.5rem;
+      --bs-gutter-y: 0;
+      width: 100%;
+      padding-right: calc(var(--bs-gutter-x) * 0.5);
+      padding-left: calc(var(--bs-gutter-x) * 0.5);
+      margin-right: auto;
+      margin-left: auto;
+      font-family: 'Times New Roman', Times, serif;
+      max-width: 1200px;
+    }
+
+    center {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 36px;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 39px;
+    }
+
+    .report-content {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 32px;
+    }
+
+    td,
+    th {
+      font-size: 12px;
+      text-align: center;
+      border: 1px solid black;
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      margin: 0;
+      padding: 0;
+      border: 1px solid black;
+      vertical-align: baseline
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container background-image">
+    <center>
+      <h4>
+        TP-ĐGTS-20 (Ban hành kèm theo Thông tư số 06/2017/TT-BTP) <br>
+        CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM<br>
+        Độc lập – Tự do – Hạnh phúc<br>
+        _ _ _ _ _
+      </h4>
+      <h3>
+        DANH SÁCH KHÁCH HÀNG THAM GIA ĐẤU GIÁ
+      </h3>
+    </center>
+    <div class="report-content">
+      <table class='table compact table-border cell-border'>
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Họ và tên</th>
+            <th>Số CCCD/ hộ chiếu</th>
+            <th>Địa chỉ</th>
+            <th>Tham gia</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each data.report.member}}
+          <tr>
+            <td>{{#fieldSerial @key}}{{/fieldSerial}}</td>
+            <td>{{member_name}}</td>
+            <td>{{id_number}}</td>
+            <td>{{address}}</td>
+            <td>
+              {{#valid join_status}}
+              v
+              {{/valid}}
+            </td>
+          </tr>
+          {{/each}}
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>

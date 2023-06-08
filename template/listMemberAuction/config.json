@@ -1,0 +1,37 @@
+{
+    "tittle": "DANH SÁCH KHÁCH HÀNG THAM GIA ĐẤU GIÁ",
+    "beforeRender": "../../template/listMemberAuction/before",
+    "htmlFile": "template/listMemberAuction/export.hbs",
+    "cssFiles": [],
+    "helperFunctions": [
+        {
+            "name": "moment",
+            "ref": "helper-moment"
+        },
+        {
+            "name": "fieldSerial",
+            "ref": "../../template/listMemberAuction/fieldSerial"
+        },
+        {
+            "name": "valid",
+            "ref": "../../template/listMemberAuction/valid"
+        }
+    ],
+    "pdf_options": {
+        "format": "A4",
+        "orientation": "Portrait",
+        "border": {
+            "top": "2cm",
+            "right": "2cm",
+            "bottom": "2cm",
+            "left": "3cm"
+        },
+        "footer": {
+            "height": "30px",
+            "width": "100%",
+            "content": {
+                "default": "<span style=\"color: #444;\">{{page}}</span>/<span>{{pages}}</span>"
+            }
+        }
+    }
+}

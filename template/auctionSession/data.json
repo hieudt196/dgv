@@ -1,0 +1,33 @@
+{
+    "time": {
+        "date": "14/05/2023",
+        "hour": 20,
+        "minute": 50
+    },
+    "agency": "Công ty đấu giá hợp danh DGV",
+    "auction": {
+        "auction_name": "Quyền sử dụng đất tại 151/62B Trần Hoàng Ra, phường Hưng Dan, Quận Ninh Bắc, Thành phố Cần Nội (lần bán 11)",
+        "auction_code": "AHIHI-2020",
+        "start_price": "7.000.000.000 ",
+        "owner": "Nguyễn Văn S",
+        "auction_manager": "Nguyễn Văn D",
+        "auction_secretary": "Nguyễn Thị B",
+        "surveyor": "Nguyễn Văn N",
+        "count": 78,
+        "end_price": "7.580.000.000",
+        "end_price_to_str": "Bảy tỷ năm trăm tám mươi triệu",
+        "end_time": "21h30"
+    },
+    "aution_manager": {
+        "name": "Trần Thanh Tùng",
+        "code": "123454"
+    },
+    "winner": {
+        "name": "Nguyễn Văn Lương A",
+        "code": "123454",
+        "address": "Số 9 ngõ 11 Duy Tân , Dịch Vọng Hầu, Cầu Giấy , Hà Nội",
+        "id_number": "012345678901",
+        "id_date": "23/07/2021",
+        "id_place": "Hà Nội"
+    }
+}

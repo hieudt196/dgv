@@ -1,0 +1,5 @@
+{
+    "tittle": "Danh sách giao dịch điều chỉnh",
+    "beforeRender": "../../template/get_OTC_x/before",
+    "xlsxFile": "template/get_OTC_x/export.xlsx"
+}

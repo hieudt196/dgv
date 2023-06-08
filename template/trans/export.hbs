@@ -1,0 +1,83 @@
+<!--
+More complex example demonstrating advanced features like
+- using custom server script to fetch remote data
+- using custom modules in safe sandbox
+- painting a chart
+- using global helpers
+- merging custom dynamic header document
+
+Note: This example requires jsreport to be configured with
+{ "allowLocalFilesAccess": true } or
+{ "sandbox": { "allowedModules": ["https"] } }
+!-->
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <style> 
+      {{Css}}
+    </style>
+  </head>
+  <body>
+    <div class="grid">
+        <div class="row">
+            <div class="cell-4 text-center text-bold">
+                <h5>{{data.companyName}}</h5>
+                <h6>{{data.tollName}}</h6>
+            </div>
+            <div class="cell-8 text-center">
+                <h2 class="text-bold">{{ title }}</h2>
+                <h3>Từ ngày {{data.fromDate}} đến {{data.toDate}}</h3>
+            </div>
+        </div>
+    </div>
+    </br>
+    <table class='table compact table-border cell-border'>
+      <thead>
+          <tr>
+              <th>Mã GD</th>
+              <th>Loại</th>
+              <th>Etag / Serial</th>
+              <th>Loại Vé</th>
+              <th>Loại Xe</th>
+              <th>Đặc Biệt</th>
+              <th>Giá Tiền</th>
+              <th>TG Vào</th>
+              <th>Trạm Vào</th>
+              <th>Làn Vào</th>
+              <th>BS ETC Vào</th>
+              <th>BS Vào</th>
+              <th>TG Ra</th>
+              <th>Trạm Ra</th>
+              <th>Làn Ra</th>
+              <th>BS ETC Ra</th>
+              <th>BS Ra</th>
+              <th>Chiều</th>
+          </tr>
+      </thead>
+      <tbody>
+          {{#each data.trans}}
+          <tr>
+              <td>{{TRANSACTION_ID}}</td>
+              <td>{{TRANSACTION_TYPE_NAME}}</td>
+              <td>{{{fieldSerial ETAG SERIAL TRANSACTION_TYPE}}}</td>
+              <td>{{PRICETYPE_NAME}}</td>
+              <td>{{VEHICLE_TYPE}}</td>
+              <td>{{SPECIAL_TRANS_TYPE_NAME}}</td>
+              <td>{{PRICE}}</td>
+              <td>{{moment ENTER_TRANS_DATETIME "YYYY/MM/DD HH:mm:ss"}}</td>
+              <td>{{ENTER_TOLL_NAME}}</td>
+              <td>{{ENTER_LANE_ID}}</td>
+              <td>{{ENTER_ETC_PLATE}}</td>
+              <td>{{ENTER_PLATE}}</td>
+              <td>{{moment TRANS_DATETIME "YYYY/MM/DD HH:mm:ss"}}</td>
+              <td>{{TOLL_NAME}}</td>
+              <td>{{LANE_ID}}</td>
+              <td>{{ETC_PLATE}}</td>
+              <td>{{PLATE}}</td>
+              <td>{{TRANS_DIR_NAME}}</td>
+          </tr>
+          {{/each}}
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{
+    "tittle": "Báo cáo chi tiết giao dịch xe qua trạm",
+    "beforeRender": "../../template/trans/before",
+    "htmlFile": "template/trans/export.hbs",
+    "cssFiles": [
+        "template/css/metro.min.css"
+    ],
+    "helperFunctions": [
+        {"name": "moment", "ref":"helper-moment"},
+        {"name": "fieldSerial", "ref":"../../template/trans/fieldSerial"}
+    ],
+    "pdf_options": {
+        "format": "A3",
+        "orientation": "landscape",
+        "border": {"top": "25px", "right": "25px", "bottom": "25px", "left": "25px"},
+        "footer": {
+            "height": "30px",
+            "width": "100%",
+            "content": {
+              "default": "<span style=\"color: #444;\">{{page}}</span>/<span>{{pages}}</span>"
+            }
+        }
+    }
+}
